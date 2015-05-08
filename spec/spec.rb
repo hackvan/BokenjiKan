@@ -1,10 +1,13 @@
 require 'spec_helper'
 require 'rails_helper'
 
-describe "route test", :type => :routing do
-  context "Topic one-many, ex 6" do
-    it "Destinations show route" do
-      expect(:get => "/destinations/1").to route_to(:controller => "destinations", :action => "show", :id => "1"), "/destinations/:id should route to destinations#show"
+describe 'destinations/edit', :type => :view do
+  context "form do" do
+    it "renders the form" do
+        assign(:destination, Destination.create(name: "test"))
+      render
+
+      expect(rendered).to have_tag("form", with: { method: "post"}), "In the view, did you add a form?"
     end
   end
 end
